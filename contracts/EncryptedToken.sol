@@ -3,8 +3,9 @@ pragma solidity ^0.8.27;
 
 import {FHE, euint64, externalEuint64} from "@fhevm/solidity/lib/FHE.sol";
 import {ConfidentialFungibleToken} from "@openzeppelin/confidential-contracts/token/ConfidentialFungibleToken.sol";
+import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
-contract EncryptedToken is ConfidentialFungibleToken {
+contract EncryptedToken is ConfidentialFungibleToken, SepoliaConfig {
     constructor(string memory name, string memory symbol) ConfidentialFungibleToken(name, symbol, "") {}
 
     /// @notice Mint tokens to an address
@@ -12,8 +13,8 @@ contract EncryptedToken is ConfidentialFungibleToken {
     /// @param inputEuint64 The encrypted amount of tokens to mint
     /// @param inputProof The proof of the encrypted amount
     function mint(address to, externalEuint64 inputEuint64, bytes calldata inputProof) public {
-        // euint64 amount = FHE.fromExternal(inputEuint64, inputProof);
-        // _mint(to, amount);
+        euint64 amount = FHE.fromExternal(inputEuint64, inputProof);
+        _mint(to, amount);
     }
 
     /// @notice Burn tokens from an address
