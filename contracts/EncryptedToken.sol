@@ -12,8 +12,8 @@ contract EncryptedToken is ConfidentialFungibleToken {
     /// @param inputEuint64 The encrypted amount of tokens to mint
     /// @param inputProof The proof of the encrypted amount
     function mint(address to, externalEuint64 inputEuint64, bytes calldata inputProof) public {
-        euint64 amount = FHE.fromExternal(inputEuint64, inputProof);
-        _mint(to, amount);
+        // euint64 amount = FHE.fromExternal(inputEuint64, inputProof);
+        // _mint(to, amount);
     }
 
     /// @notice Burn tokens from an address
