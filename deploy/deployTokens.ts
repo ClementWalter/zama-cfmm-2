@@ -7,7 +7,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // Deploy Token A
   const deployedZama = await deploy("Zama", {
-    contract: "EncryptedToken",
+    contract: "FHEToken",
     from: deployer,
     args: ["Zama", "ZAMA"],
     log: true,
@@ -17,7 +17,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // Deploy Token B
   const deployedKakarot = await deploy("Kakarot", {
-    contract: "EncryptedToken",
+    contract: "FHEToken",
     from: deployer,
     args: ["Kakarot", "KKRT"],
     log: true,
@@ -28,4 +28,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
 export default func;
 func.id = "deploy_tokens";
-func.tags = ["EncryptedToken", "Tokens"];
+func.tags = ["FHEToken", "Tokens"];

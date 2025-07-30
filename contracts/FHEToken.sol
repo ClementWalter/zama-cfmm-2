@@ -5,7 +5,7 @@ import {FHE, euint64, externalEuint64} from "@fhevm/solidity/lib/FHE.sol";
 import {ConfidentialFungibleToken} from "@openzeppelin/confidential-contracts/token/ConfidentialFungibleToken.sol";
 import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
-contract EncryptedToken is ConfidentialFungibleToken, SepoliaConfig {
+contract FHEToken is ConfidentialFungibleToken, SepoliaConfig {
     constructor(string memory name, string memory symbol) ConfidentialFungibleToken(name, symbol, "") {}
 
     /// @notice Mint tokens to an address

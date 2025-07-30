@@ -15,7 +15,7 @@ task("task:mintTokens", "Mints tokens to the first address")
     const signers = await ethers.getSigners();
     const recipient = signers[0].address;
 
-    const token = await ethers.getContractAt("EncryptedToken", tokenContract.address);
+    const token = await ethers.getContractAt("FHEToken", tokenContract.address);
 
     const encryptedAmount = await fhevm
       .createEncryptedInput(tokenContract.address, recipient)
@@ -50,7 +50,7 @@ task("task:burnTokens", "Burns tokens from the first address")
     const signers = await ethers.getSigners();
     const recipient = signers[0].address;
 
-    const token = await ethers.getContractAt("EncryptedToken", tokenContract.address);
+    const token = await ethers.getContractAt("FHEToken", tokenContract.address);
 
     const encryptedAmount = await fhevm
       .createEncryptedInput(tokenContract.address, recipient)
