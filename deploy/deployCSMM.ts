@@ -11,22 +11,24 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const kakarotContract = await get("Kakarot");
 
   // Deploy FHECSMM
-  const deployedFHEPair = await deploy("FHECSMM", {
+  const deployedFHECSMM = await deploy("FHECSMM", {
     from: deployer,
     args: [zamaContract.address, kakarotContract.address],
     log: true,
   });
 
-  console.log(`FHECSMM contract: `, deployedFHEPair.address);
+  console.log(`FHECSMM contract: `, deployedFHECSMM.address);
   console.log(`  Zama: `, zamaContract.address);
   console.log(`  Kakarot: `, kakarotContract.address);
 
   const zama = await ethers.getContractAt("FHEToken", zamaContract.address);
   const kakarot = await ethers.getContractAt("FHEToken", kakarotContract.address);
-  await zama.setOperator(deployedFHEPair.address, 2 ** 48 - 1);
-  console.log(`  Zama is operator: `, await zama.isOperator(deployer, deployedFHEPair.address));
-  await kakarot.setOperator(deployedFHEPair.address, 2 ** 48 - 1);
-  console.log(`  Kakarot is operator: `, await kakarot.isOperator(deployer, deployedFHEPair.address));
+  let tx = await zama.setOperator(deployedFHECSMM.address, 2 ** 48 - 1);
+  await tx.wait();
+  console.log(` FHECSMM is operator for Zama: `, await zama.isOperator(deployedFHECSMM.address, deployer));
+  tx = await kakarot.setOperator(deployedFHECSMM.address, 2 ** 48 - 1);
+  await tx.wait();
+  console.log(` FHECSMM is operator for Kakarot: `, await kakarot.isOperator(deployedFHECSMM.address, deployer));
 };
 
 export default func;
