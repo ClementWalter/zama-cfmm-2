@@ -10,7 +10,6 @@ import { vars } from "hardhat/config";
 import "solidity-coverage";
 
 import "./tasks/accounts";
-import "./tasks/FHECounter";
 import "./tasks/FHECSMM";
 import "./tasks/FHEMath";
 import "./tasks/FHETokens";
